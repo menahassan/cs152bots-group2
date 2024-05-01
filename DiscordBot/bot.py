@@ -27,7 +27,7 @@ with open(token_path) as f:
 
 
 class ModBot(discord.Client):
-    def __init__(self): 
+    def __init__(self):
         intents = discord.Intents.default()
         intents.message_content = True
         super().__init__(command_prefix='.', intents=intents)
@@ -53,14 +53,14 @@ class ModBot(discord.Client):
             for channel in guild.text_channels:
                 if channel.name == f'group-{self.group_num}-mod':
                     self.mod_channels[guild.id] = channel
-        
+
 
     async def on_message(self, message):
         '''
-        This function is called whenever a message is sent in a channel that the bot can see (including DMs). 
-        Currently the bot is configured to only handle messages that are sent over DMs or in your group's "group-#" channel. 
+        This function is called whenever a message is sent in a channel that the bot can see (including DMs).
+        Currently the bot is configured to only handle messages that are sent over DMs or in your group's "group-#" channel.
         '''
-        # Ignore messages from the bot 
+        # Ignore messages from the bot
         if message.author.id == self.user.id:
             return
 
@@ -109,11 +109,11 @@ class ModBot(discord.Client):
         scores = self.eval_text(message.content)
         await mod_channel.send(self.code_format(scores))
 
-    
-    def eval_text(self, message):
+
+    def eval_text(self, message) -> str:
         ''''
-        TODO: Once you know how you want to evaluate messages in your channel, 
-        insert your code here! This will primarily be used in Milestone 3. 
+        TODO: Once you know how you want to evaluate messages in your channel,
+        insert your code here! This will primarily be used in Milestone 3.
         '''
 
         banned_phrases = ["cryptocurrency", "zero risk"]
