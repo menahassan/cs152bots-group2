@@ -115,16 +115,28 @@ class ModBot(discord.Client):
         TODO: Once you know how you want to evaluate messages in your channel, 
         insert your code here! This will primarily be used in Milestone 3. 
         '''
-        return message
 
-    
+        banned_phrases = ["cryptocurrency", "zero risk"]
+        for banned_phrase in banned_phrases:
+            if re.search(banned_phrase, message):
+                return banned_phrase
+
+        return ""
+
+
     def code_format(self, text):
         ''''
-        TODO: Once you know how you want to show that a message has been 
-        evaluated, insert your code here for formatting the string to be 
-        shown in the mod channel. 
+        TODO: Once you know how you want to show that a message has been
+        evaluated, insert your code here for formatting the string to be
+        shown in the mod channel.
         '''
-        return "Evaluated: '" + text+ "'"
+
+        opening = "Evaluated:"
+
+        if text:
+            return f'{opening} We don\'t talk about "{text}"'
+        else:
+            return f'{opening} All good here'
 
 
 client = ModBot()
